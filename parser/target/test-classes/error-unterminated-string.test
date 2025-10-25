@@ -1,0 +1,7 @@
+// Error: unterminated string
+
+test BadString {
+    GET "/api/test;
+    expect status = 200;
+    expect body contains "test";
+}

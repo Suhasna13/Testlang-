@@ -1,0 +1,40 @@
+// Full feature test with config, variables, and all HTTP methods
+
+config {
+    base_url = "http://localhost:8080";
+    header "Content-Type" = "application/json";
+    header "X-App" = "TestApp";
+}
+
+let userId = 42;
+let username = "testuser";
+
+test GetTest {
+    GET "/api/users/$userId";
+    expect status = 200;
+    expect body contains "user";
+}
+
+test PostTest {
+    POST "/api/users" {
+        header "Authorization" = "Bearer token123";
+        body = "{ \"username\": \"$username\" }";
+    };
+    expect status = 201;
+    expect header "Content-Type" contains "json";
+    expect body contains "created";
+}
+
+test PutTest {
+    PUT "/api/users/$userId" {
+        body = "{ \"name\": \"updated\" }";
+    };
+    expect status = 200;
+    expect body contains "updated";
+}
+
+test DeleteTest {
+    DELETE "/api/users/$userId";
+    expect status = 204;
+    expect header "X-App" = "TestApp";
+}

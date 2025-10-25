@@ -1,0 +1,320 @@
+package com.testlang.parser;
+
+import com.testlang.ast.*;
+import java_cup.runtime.*;
+import java.util.*;
+
+parser code {:
+    private String lastExpected = "";
+
+    public void syntax_error(Symbol cur_token) {
+        StringBuilder msg = new StringBuilder();
+        msg.append("Syntax error at line ").append(cur_token.left);
+
+        // Add information about the problematic token
+        if (cur_token.value != null) {
+            msg.append(": unexpected '").append(cur_token.value).append("'");
+        }
+
+        // Add expected tokens if available
+        if (!lastExpected.isEmpty()) {
+            msg.append("\n  Expected: ").append(lastExpected);
+        }
+
+        report_error(msg.toString(), null);
+    }
+
+    public void report_error(String message, Object info) {
+        System.err.println(message);
+    }
+
+    public void unrecovered_syntax_error(Symbol cur_token) throws ParserException {
+        throw new ParserException(
+            "Cannot recover from syntax error. Parsing aborted.",
+            cur_token.left
+        );
+    }
+:}
+
+/* Terminals (tokens) */
+terminal CONFIG, BASE_URL, HEADER, LET, TEST;
+terminal GET, POST, PUT, DELETE;
+terminal EXPECT, STATUS, BODY, CONTAINS;
+terminal LBRACE, RBRACE, SEMICOLON, EQUALS;
+terminal String IDENTIFIER, STRING;
+terminal Integer NUMBER;
+
+/* Non-terminals */
+non terminal Program program;
+non terminal Config config_block;
+non terminal List config_items;
+non terminal Object config_item;
+non terminal List variable_list;
+non terminal Variable variable_decl;
+non terminal List test_list;
+non terminal Test test_block;
+non terminal List statements;
+non terminal Statement statement;
+non terminal Request request;
+non terminal List request_items;
+non terminal Object request_item;
+non terminal Assertion assertion;
+
+/* Precedence: expect 3 shift/reduce conflicts from optional variable_list */
+precedence nonassoc LET, TEST;
+
+/* Grammar Rules */
+
+program ::=
+    config_block:c variable_list:vars test_list:tests
+    {:
+        Program p = new Program();
+        if (c != null) p.setConfig(c);
+        if (vars != null) {
+            for (Object v : vars) {
+                p.addVariable((Variable) v);
+            }
+        }
+        for (Object t : tests) {
+            p.addTest((Test) t);
+        }
+        RESULT = p;
+    :}
+    | variable_list:vars test_list:tests
+    {:
+        Program p = new Program();
+        if (vars != null) {
+            for (Object v : vars) {
+                p.addVariable((Variable) v);
+            }
+        }
+        for (Object t : tests) {
+            p.addTest((Test) t);
+        }
+        RESULT = p;
+    :}
+    | test_list:tests
+    {:
+        Program p = new Program();
+        for (Object t : tests) {
+            p.addTest((Test) t);
+        }
+        RESULT = p;
+    :}
+    ;
+
+config_block ::=
+    CONFIG LBRACE config_items:items RBRACE
+    {:
+        Config c = new Config();
+        for (Object item : items) {
+            if (item instanceof String) {
+                c.setBaseUrl((String) item);
+            } else if (item instanceof Header) {
+                c.addHeader((Header) item);
+            }
+        }
+        RESULT = c;
+    :}
+    ;
+
+config_items ::=
+    config_items:list config_item:item
+    {:
+        list.add(item);
+        RESULT = list;
+    :}
+    | config_item:item
+    {:
+        List list = new ArrayList();
+        list.add(item);
+        RESULT = list;
+    :}
+    ;
+
+config_item ::=
+    BASE_URL EQUALS STRING:url SEMICOLON
+    {:
+        RESULT = url;
+    :}
+    | HEADER STRING:key EQUALS STRING:value SEMICOLON
+    {:
+        RESULT = new Header(key, value);
+    :}
+    ;
+
+variable_list ::=
+    variable_list:list variable_decl:v
+    {:
+        list.add(v);
+        RESULT = list;
+    :}
+    | variable_decl:v
+    {:
+        List list = new ArrayList();
+        list.add(v);
+        RESULT = list;
+    :}
+    | /* empty */
+    {:
+        RESULT = new ArrayList();
+    :}
+    ;
+
+variable_decl ::=
+    LET IDENTIFIER:name EQUALS STRING:value SEMICOLON
+    {:
+        RESULT = new Variable(name, value);
+    :}
+    | LET IDENTIFIER:name EQUALS NUMBER:value SEMICOLON
+    {:
+        RESULT = new Variable(name, value);
+    :}
+    ;
+
+test_list ::=
+    test_list:list test_block:t
+    {:
+        list.add(t);
+        RESULT = list;
+    :}
+    | test_block:t
+    {:
+        List list = new ArrayList();
+        list.add(t);
+        RESULT = list;
+    :}
+    ;
+
+test_block ::=
+    TEST IDENTIFIER:name LBRACE statements:stmts RBRACE
+    {:
+        Test test = new Test(name);
+        for (Object s : stmts) {
+            test.addStatement((Statement) s);
+        }
+        RESULT = test;
+    :}
+    ;
+
+statements ::=
+    statements:list statement:s
+    {:
+        list.add(s);
+        RESULT = list;
+    :}
+    | statement:s
+    {:
+        List list = new ArrayList();
+        list.add(s);
+        RESULT = list;
+    :}
+    ;
+
+statement ::=
+    request:r
+    {:
+        RESULT = r;
+    :}
+    | assertion:a
+    {:
+        RESULT = a;
+    :}
+    ;
+
+request ::=
+    GET STRING:url SEMICOLON
+    {:
+        RESULT = new Request("GET", url);
+    :}
+    | DELETE STRING:url SEMICOLON
+    {:
+        RESULT = new Request("DELETE", url);
+    :}
+    | POST STRING:url LBRACE request_items:items RBRACE SEMICOLON
+    {:
+        Request req = new Request("POST", url);
+        for (Object item : items) {
+            if (item instanceof Header) {
+                req.addHeader((Header) item);
+            } else if (item instanceof String) {
+                req.setBody((String) item);
+            }
+        }
+        RESULT = req;
+    :}
+    | PUT STRING:url LBRACE request_items:items RBRACE SEMICOLON
+    {:
+        Request req = new Request("PUT", url);
+        for (Object item : items) {
+            if (item instanceof Header) {
+                req.addHeader((Header) item);
+            } else if (item instanceof String) {
+                req.setBody((String) item);
+            }
+        }
+        RESULT = req;
+    :}
+    | POST STRING:url LBRACE RBRACE SEMICOLON
+    {:
+        RESULT = new Request("POST", url);
+    :}
+    | PUT STRING:url LBRACE RBRACE SEMICOLON
+    {:
+        RESULT = new Request("PUT", url);
+    :}
+    ;
+
+request_items ::=
+    request_items:list request_item:item
+    {:
+        list.add(item);
+        RESULT = list;
+    :}
+    | request_item:item
+    {:
+        List list = new ArrayList();
+        list.add(item);
+        RESULT = list;
+    :}
+    ;
+
+request_item ::=
+    HEADER STRING:key EQUALS STRING:value SEMICOLON
+    {:
+        RESULT = new Header(key, value);
+    :}
+    | BODY EQUALS STRING:bodyContent SEMICOLON
+    {:
+        RESULT = bodyContent;
+    :}
+    ;
+
+assertion ::=
+    EXPECT STATUS EQUALS NUMBER:code SEMICOLON
+    {:
+        Assertion a = new Assertion(Assertion.Type.STATUS_EQUALS);
+        a.setStatusCode(code);
+        RESULT = a;
+    :}
+    | EXPECT HEADER STRING:key EQUALS STRING:value SEMICOLON
+    {:
+        Assertion a = new Assertion(Assertion.Type.HEADER_EQUALS);
+        a.setKey(key);
+        a.setValue(value);
+        RESULT = a;
+    :}
+    | EXPECT HEADER STRING:key CONTAINS STRING:value SEMICOLON
+    {:
+        Assertion a = new Assertion(Assertion.Type.HEADER_CONTAINS);
+        a.setKey(key);
+        a.setValue(value);
+        RESULT = a;
+    :}
+    | EXPECT BODY CONTAINS STRING:value SEMICOLON
+    {:
+        Assertion a = new Assertion(Assertion.Type.BODY_CONTAINS);
+        a.setValue(value);
+        RESULT = a;
+    :}
+    ;

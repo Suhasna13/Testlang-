@@ -1,0 +1,7 @@
+// Minimal valid syntax test
+
+test MinimalTest {
+    GET "/api/test";
+    expect status = 200;
+    expect body contains "test";
+}

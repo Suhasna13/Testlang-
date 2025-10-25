@@ -1,0 +1,3 @@
+com\testlang\parser\ParserTest.class
+com\testlang\codegen\CodeGeneratorTest.class
+com\testlang\parser\LexerTest.class

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.testlang.parser.ParserTest" time="0.191" tests="13" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="17"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="S:\Y2\S2\PP\IT23632332 - U. T. S. Ranathunga\parser\target\test-classes;S:\Y2\S2\PP\IT23632332 - U. T. S. Ranathunga\parser\target\classes;C:\Users\VICTUS\.m2\repository\de\jflex\jflex\1.8.2\jflex-1.8.2.jar;C:\Users\VICTUS\.m2\repository\org\apache\ant\ant\1.10.5\ant-1.10.5.jar;C:\Users\VICTUS\.m2\repository\org\apache\ant\ant-launcher\1.10.5\ant-launcher-1.10.5.jar;C:\Users\VICTUS\.m2\repository\com\github\vbmacher\java-cup-runtime\11b-20160615\java-cup-runtime-11b-20160615.jar;C:\Users\VICTUS\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\VICTUS\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\VICTUS\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\VICTUS\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\VICTUS\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\VICTUS\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\VICTUS\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;"/>
+    <property name="java.vm.vendor" value="Amazon.com Inc."/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://aws.amazon.com/corretto/"/>
+    <property name="user.timezone" value="Asia/Colombo"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="17"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="SG"/>
+    <property name="sun.boot.library.path" value="C:\Users\VICTUS\.jdks\corretto-17.0.14\bin"/>
+    <property name="sun.java.command" value="C:\Users\VICTUS\AppData\Local\Temp\surefire805006565812606226\surefirebooter16929046311461442353.jar C:\Users\VICTUS\AppData\Local\Temp\surefire805006565812606226 2025-10-25T18-44-05_440-jvmRun1 surefire13688210078755577441tmp surefire_011732670425694437828tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="S:\Y2\S2\PP\IT23632332 - U. T. S. Ranathunga\parser\target\test-classes;S:\Y2\S2\PP\IT23632332 - U. T. S. Ranathunga\parser\target\classes;C:\Users\VICTUS\.m2\repository\de\jflex\jflex\1.8.2\jflex-1.8.2.jar;C:\Users\VICTUS\.m2\repository\org\apache\ant\ant\1.10.5\ant-1.10.5.jar;C:\Users\VICTUS\.m2\repository\org\apache\ant\ant-launcher\1.10.5\ant-launcher-1.10.5.jar;C:\Users\VICTUS\.m2\repository\com\github\vbmacher\java-cup-runtime\11b-20160615\java-cup-runtime-11b-20160615.jar;C:\Users\VICTUS\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\VICTUS\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\VICTUS\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\VICTUS\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\VICTUS\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\VICTUS\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\VICTUS\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.9.3\junit-jupiter-params-5.9.3.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\VICTUS"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-01-21"/>
+    <property name="java.home" value="C:\Users\VICTUS\.jdks\corretto-17.0.14"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="S:\Y2\S2\PP\IT23632332 - U. T. S. Ranathunga\parser"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\VICTUS\AppData\Local\Temp\surefire805006565812606226\surefirebooter16929046311461442353.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="17.0.14+7-LTS"/>
+    <property name="user.name" value="VICTUS"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="Cp1252"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Corretto-17.0.14.7.1"/>
+    <property name="localRepository" value="C:\Users\VICTUS\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/corretto/corretto-17/issues/"/>
+    <property name="java.io.tmpdir" value="C:\Users\VICTUS\AppData\Local\Temp\"/>
+    <property name="idea.version" value="2024.3.4.1"/>
+    <property name="java.version" value="17.0.14"/>
+    <property name="user.dir" value="S:\Y2\S2\PP\IT23632332 - U. T. S. Ranathunga\parser"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Users\VICTUS\.jdks\corretto-17.0.14\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Python313\Scripts\;C:\Python313\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Users\Administrator\AppData\Local\Microsoft\WindowsApps;C:\Program Files\HP\OMEN-Broadcast\Common;C:\Program Files\Microchip\xc8\v2.50\bin;C:\Program Files\Microchip\xc-dsc\v3.10\bin;C:\msys64\ucrt64\bin;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk-23\bin;;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\nodejs\;C:\Program Files\NVIDIA Corporation\NVIDIA app\NvDLISR;C:\ProgramData\chocolatey\bin;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\cursor\resources\app\bin;C:\Users\VICTUS\AppData\Local\Microsoft\WindowsApps;C:\Users\VICTUS\AppData\Local\Programs\Microsoft VS Code\bin;C:\altera\13.1\modelsim_ase\win32aloem;C:\msys64\ucrt64\bin;C:\msys64\mingw64\bin;C:\Program Files\JetBrains\IntelliJ IDEA 2024.3.4.1\bin;;C:\Program Files\JetBrains\WebStorm 2024.3.5\bin;;C:\Users\VICTUS\AppData\Roaming\npm;C:\Program Files\nodejs;C:\Users\VICTUS\.dotnet\tools;C:\Users\VICTUS\AppData\Local\spicetify;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Amazon.com Inc."/>
+    <property name="java.vm.version" value="17.0.14+7-LTS"/>
+    <property name="java.specification.maintenance.version" value="1"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="61.0"/>
+  </properties>
+  <testcase name="testParseVariableDeclarations{Path}" classname="com.testlang.parser.ParserTest" time="0.017"/>
+  <testcase name="testParseStatusAssertion{Path}" classname="com.testlang.parser.ParserTest" time="0.016"/>
+  <testcase name="testParseSyntaxError{Path}" classname="com.testlang.parser.ParserTest" time="0.015"/>
+  <testcase name="testParseConfigBlock{Path}" classname="com.testlang.parser.ParserTest" time="0.016"/>
+  <testcase name="testParseMinimalTest{Path}" classname="com.testlang.parser.ParserTest" time="0.005"/>
+  <testcase name="testParseHeaderAssertions{Path}" classname="com.testlang.parser.ParserTest" time="0.005"/>
+  <testcase name="testParsePostRequest{Path}" classname="com.testlang.parser.ParserTest" time="0.005"/>
+  <testcase name="testParsePutRequest{Path}" classname="com.testlang.parser.ParserTest" time="0.014"/>
+  <testcase name="testParseMultipleTests{Path}" classname="com.testlang.parser.ParserTest" time="0.017"/>
+  <testcase name="testParseFullFeatureProgram{Path}" classname="com.testlang.parser.ParserTest" time="0.021"/>
+  <testcase name="testParseGetRequest{Path}" classname="com.testlang.parser.ParserTest" time="0.015"/>
+  <testcase name="testParseBodyAssertion{Path}" classname="com.testlang.parser.ParserTest" time="0.018"/>
+  <testcase name="testParseDeleteRequest{Path}" classname="com.testlang.parser.ParserTest" time="0.019"/>
+</testsuite>
