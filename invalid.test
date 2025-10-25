@@ -1,0 +1,28 @@
+// Invalid TestLang++ Examples
+// This file contains syntax errors for testing error messages
+
+// ERROR: Identifier cannot start with a digit
+let 2a = "x";
+
+// ERROR: Body must be a string
+test InvalidBody {
+    POST "/api/test" {
+        body = 123;
+    }
+    expect status = 200;
+    expect body contains "test";
+}
+
+// ERROR: Status must be integer
+test InvalidStatus {
+    GET "/api/test";
+    expect status = "200";
+    expect body contains "test";
+}
+
+// ERROR: Missing semicolon after request
+test MissingSemicolon {
+    GET "/api/test"
+    expect status = 200;
+    expect body contains "test";
+}

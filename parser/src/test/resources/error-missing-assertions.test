@@ -1,0 +1,6 @@
+// Validation error: not enough assertions
+
+test InsufficientAssertions {
+    GET "/api/test";
+    expect status = 200;
+}

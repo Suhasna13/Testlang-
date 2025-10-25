@@ -1,0 +1,9 @@
+// Error: identifier starting with digit
+
+let 2bad = "value";
+
+test SomeTest {
+    GET "/api/test";
+    expect status = 200;
+    expect body contains "test";
+}

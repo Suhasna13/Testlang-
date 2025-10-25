@@ -1,0 +1,45 @@
+// TestLang++ Example - All 3 Backend Test Cases
+// This file demonstrates the complete DSL syntax
+
+config {
+    base_url = "http://localhost:8080";
+    header "Content-Type" = "application/json";
+    header "X-App" = "TestLangDemo";
+}
+
+// Variables for testing
+let user = "admin";
+let id = 42;
+
+// Test Case 1: POST /api/login
+// Tests: POST body, status assertion, header contains, body contains
+test Login {
+    POST "/api/login" {
+        body = "{ \"username\": \"$user\", \"password\": \"1234\" }";
+    };
+    expect status = 200;
+    expect header "Content-Type" contains "json";
+    expect body contains "\"token\":";
+}
+
+// Test Case 2: GET /api/users/{id}
+// Tests: GET with variable substitution, status assertion, body contains
+test GetUser {
+    GET "/api/users/$id";
+    expect status = 200;
+    expect body contains "\"id\":42";
+}
+
+// Test Case 3: PUT /api/users/{id}
+// Tests: PUT body, header equals, header contains, multiple body contains
+test UpdateUser {
+    PUT "/api/users/$id" {
+        header "Content-Type" = "application/json";
+        body = "{ \"role\": \"ADMIN\" }";
+    };
+    expect status = 200;
+    expect header "X-App" = "TestLangDemo";
+    expect header "Content-Type" contains "json";
+    expect body contains "\"updated\":true";
+    expect body contains "\"role\":\"ADMIN\"";
+}
